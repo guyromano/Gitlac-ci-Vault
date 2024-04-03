@@ -10,7 +10,7 @@ build:
   script:
     - cd docker_weather
     - docker build -t $TEST_IMAGE .
-    - docker push $TEST_IMAGEi
+    - docker push $TEST_IMAGE
 
 test:
   stage: test
