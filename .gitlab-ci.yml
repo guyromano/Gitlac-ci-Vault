@@ -17,7 +17,9 @@ test:
   script:
     - docker ps
     - docker pull $TEST_IMAGE
-    - docker run -d -p 9090:9090 $TEST_IMAGE
+    - docker run -d -p 9090:9090 --name test $TEST_IMAGE
     - apk update && apk add curl
-    - curl http://127.0.0.1:9090
+    - curl http://172.31.27.104:9090
+  after_script:
+    - docker rm -f test
 
