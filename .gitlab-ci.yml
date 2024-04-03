@@ -1,6 +1,6 @@
 default:
   before_script:
-    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin <<<$CI_REGISTRY_PASSWORD
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
 variables:
   TEST_IMAGE: $CI_REGISTRY_IMAGE:test
