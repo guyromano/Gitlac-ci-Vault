@@ -16,6 +16,6 @@ test:
   stage: test
   script:
     - docker pull $TEST_IMAGE
-    - docker run $TEST_IMAGE
+    - docker run $TEST_IMAGE -d
     - python3 -m pytest /docker_weather/tests/connectivity_test.py
 
