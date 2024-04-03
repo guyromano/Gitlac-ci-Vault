@@ -29,8 +29,8 @@ deploy:
   stage: deploy
   script:
     - docker pull $TEST_IMAGE
-    - docker tag $CI_REGISTRY_IMAGE $IMAGE_VERSION
-    - docker tag $CI_REGISTRY_IMAGE $IMAGE_LATEST
+    - docker tag $TEST_IMAGE $IMAGE_VERSION
+    - docker tag $TEST_IMAGE $IMAGE_LATEST
     - docker push $IMAGE_VERSION
     - docker push $IMAGE_TEST
 
