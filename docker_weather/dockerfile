@@ -1,0 +1,22 @@
+FROM python:3.12-slim as guni
+
+WORKDIR /weatherapp
+COPY final_project /weatherapp
+SHELL ["/bin/bash", "-c"]
+RUN pip install -r requirements.txt
+
+FROM guni
+
+RUN apt-get update
+RUN apt-get install nginx -y
+WORKDIR /weatherapp
+COPY weatherapp /etc/nginx/sites-available/
+#COPY localhost.crt /etc/ssl/certs/localhost.crt
+#COPY localhost.key /etc/ssl/private/localhost.key
+RUN ln -s /etc/nginx/sites-available/weatherapp /etc/nginx/sites-enabled
+RUN rm /etc/nginx/sites-enabled/default
+RUN update-ca-certificates
+EXPOSE 80
+EXPOSE 443
+
+CMD service nginx start & gunicorn --workers 3 --bind unix:weatherapp.sock -m 000 main:website
