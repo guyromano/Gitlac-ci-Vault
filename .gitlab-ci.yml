@@ -26,7 +26,7 @@ test:
     - docker rm -f test
 
 deploy:
-  stage: delivery
+  stage: deploy
   script:
     - docker pull $TEST_IMAGE
     - docker tag $CI_REGISTRY_IMAGE $IMAGE_VERSION
