@@ -4,3 +4,5 @@ build-job:
     - sh "sudo docker build -t weatherapp ./docker_wether/"
   tags:
     - build
+
+    //
