@@ -5,10 +5,17 @@ default:
 variables:
   TEST_IMAGE: $CI_REGISTRY_IMAGE:test
 
-build-job:
+build:
   stage: build
   script:
     - cd docker_weather
     - docker build -t $TEST_IMAGE .
-    - docker push $TEST_IMAGE
+    - docker push $TEST_IMAGEi
+
+test:
+  stage: test
+  script:
+    - docker pull $TEST_IMAGE
+    - docker run $TEST_IMAGE
+    - python3 -m pytest /docker_weather/tests/connectivity_test.py
 
