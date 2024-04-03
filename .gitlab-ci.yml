@@ -1,5 +1,6 @@
 build-job:
   stage: build
   script:
-    - sh "sudo docker build -t weatherapp ./docker_wether/"
+    - cd docker_weather
+    - sh "sudo docker build -t weatherapp ."
 
