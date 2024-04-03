@@ -4,6 +4,8 @@ default:
 
 variables:
   TEST_IMAGE: $CI_REGISTRY_IMAGE:test
+  IMAGE_VERSION: $CI_REGISTRY_IMAGE:v_$CI_COMMIT_SHA
+  IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
 build:
   stage: build
@@ -20,6 +22,16 @@ test:
     - docker run -d -p 9090:9090 --name test $TEST_IMAGE
     - apk update && apk add curl
     - curl http://172.31.27.104:9090
-      #after_script:
-      #- docker rm -f test
+  after_script:
+    - docker rm -f test
+
+delivery:
+  stage: delivery
+  script:
+    - docker pull $TEST_IMAGE
+    - docker tag $CI_REGISTRY_IMAGE $IMAGE_VERSION
+    - docker tag $CI_REGISTRY_IMAGE $IMAGE_LATEST
+    - docker push $IMAGE_VERSION
+    - docker push $IMAGE_TEST
+
 
