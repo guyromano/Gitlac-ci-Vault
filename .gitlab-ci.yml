@@ -32,6 +32,6 @@ deploy:
     - docker tag $TEST_IMAGE $IMAGE_VERSION
     - docker tag $TEST_IMAGE $IMAGE_LATEST
     - docker push $IMAGE_VERSION
-    - docker push $IMAGE_TEST
+    - docker push $IMAGE_LATEST
 
 
