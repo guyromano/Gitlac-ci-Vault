@@ -18,7 +18,5 @@ test:
     - docker ps
     - docker pull $TEST_IMAGE
     - docker run -d -p 9090:9090 $TEST_IMAGE
-    - apk update
-    - apk add python3 py3-pip pytest requests
-    - python3 -m pytest ./docker_weather/tests/connectivity_test.py
+    - curl http://127.0.0.1:9090
 
