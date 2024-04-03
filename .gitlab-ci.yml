@@ -15,6 +15,7 @@ build:
 test:
   stage: test
   script:
+    - docker ps
     - docker pull $TEST_IMAGE
     - docker run -d -p 9090:9090 $TEST_IMAGE
     - apk update
