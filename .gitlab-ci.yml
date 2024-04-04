@@ -14,8 +14,9 @@ job_using_vault:
   stage: secrets
   secrets:
     TEXT_SECRET:
-      vault: weatherapp/text/Assignment@kv  # translates to secret `ops/data/production/db`, field `password`
+      vault: weatherapp/text/Assignment@kv
   script:
+    - echo something
     - cat $TEXT_SECRET
 
 build:
