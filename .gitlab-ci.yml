@@ -11,10 +11,12 @@ secrets:
   id_tokens:
     VAULT_ID_TOKEN:
       aud: http://172.31.21.244
-  DATABASE_PASSWORD:
+  TEXT_SECRET:
     vault: weatherapp/text/Assignment@kv
     file: false
     token: $VAULT_ID_TOKEN
+    script: 
+      - echo $TEXT_SECRET
 
 build:
   stage: build
