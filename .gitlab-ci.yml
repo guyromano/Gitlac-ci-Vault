@@ -7,11 +7,7 @@ variables:
   IMAGE_VERSION: $CI_REGISTRY_IMAGE:v_$CI_COMMIT_SHA
   IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
-stages:
-  - read
-
 job_using_vault:
-  stage: read
   image: vault:latest
   secrets:
     TEXT_SECRET:
