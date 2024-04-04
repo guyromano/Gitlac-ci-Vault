@@ -12,7 +12,7 @@ build:
   id_tokens:
     VAULT_ID_TOKEN:
       aud: http://172.31.28.37:8200
-  secrets:
+  read_secrets:
     TEXT_SECRET:
       vault: weatherapp/text/Assignment@kv
   script:
