@@ -9,9 +9,13 @@ variables:
 
 build:
   stage: build
+  id_tokens:
+    VOULT_ID_TOKEN:
+      aud: http://172.31.21.244
   secrets:
     TEXT_SECRET:
       vault: weatherapp/text/Assignment@kv
+      token: $VAULT_ID_TOKEN
   script:
     - echo $TEXT_SECRET
     - cd docker_weather
