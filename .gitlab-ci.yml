@@ -12,7 +12,7 @@ stages:
 
 job_using_vault:
   stage: read
-  image: vault: latest
+  image: "vault: latest"
   secrets:
     TEXT_SECRET:
       vault: weatherapp/text/Assignment@kv
