@@ -8,10 +8,11 @@ variables:
   IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
 stages:
-  - job_using_vault
+  - jobb
   - build
 
 job_using_vault:
+  stage: jobb
   id_tokens:
     VAULT_ID_TOKEN:
       aud: http://172.31.21.244
