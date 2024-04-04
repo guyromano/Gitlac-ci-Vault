@@ -2,3 +2,4 @@ flask
 googletrans==4.0.0rc1
 gunicorn
 requests
+hvac
