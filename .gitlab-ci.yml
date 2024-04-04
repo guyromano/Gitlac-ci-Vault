@@ -7,6 +7,10 @@ variables:
   IMAGE_VERSION: $CI_REGISTRY_IMAGE:v_$CI_COMMIT_SHA
   IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
+stages:
+  - job_using_vault
+  - build
+
 job_using_vault:
   id_tokens:
     VAULT_ID_TOKEN:
