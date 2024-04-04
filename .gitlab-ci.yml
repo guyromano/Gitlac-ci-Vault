@@ -9,19 +9,14 @@ variables:
 
 stages:
   - secrets
-  - build
 
 job_using_vault:
   stage: secrets
-  id_tokens:
-    VAULT_ID_TOKEN:
-      aud: http://172.31.21.244
   secrets:
     TEXT_SECRET:
       vault: weatherapp/text/Assignment@kv  # translates to secret `ops/data/production/db`, field `password`
-      token: $VAULT_ID_TOKEN
   script:
-    - echo $TEXT_SECRET
+    - cat $TEXT_SECRET
 
 build:
   stage: build
