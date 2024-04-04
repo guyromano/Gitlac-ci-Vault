@@ -7,9 +7,10 @@ variables:
   IMAGE_VERSION: $CI_REGISTRY_IMAGE:v_$CI_COMMIT_SHA
   IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
-secrets:
-  TEXT_SECRET:
-    vault: weatherapp/text/Assignment@kv
+read_secrets:
+  image: hashicorp/vault:latest
+  script:
+    - export TEXT_SECRET="$(vault kv get -field=Assignment kv/weatherapp/text)"
 
 build:
   stage: build
