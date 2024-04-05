@@ -11,7 +11,7 @@ build:
   stage: build
   script:
     - apk update && apk add curl && apk add jq
-    - export RUNNER_TOKEN=$(curl --request POST --data "{\"role_id\": \"$APPROLE_ROLE_ID\", \"secret_id\":\"$APPROLE_SECRET_ID\"}" "$VAULT_SERVER_URL/v1/auth/approle/login" | jq -r ".auth.client_token")
+    - "export RUNNER_TOKEN=$(curl --request POST --data \"{\"role_id\": \"$APPROLE_ROLE_ID\", \"secret_id\":\"$APPROLE_SECRET_ID\"}\" \"$VAULT_SERVER_URL/v1/auth/approle/login\" | jq -r \".auth.client_token\")"
     - echo $RUNNER_TOKEN
     - echo $TEXT_SECRET
     - cd docker_weather
