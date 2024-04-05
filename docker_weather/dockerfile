@@ -18,7 +18,8 @@ RUN rm /etc/nginx/sites-enabled/default
 RUN update-ca-certificates
 EXPOSE 80
 EXPOSE 443
-ARG SECRET=$TEXT_SECRET
-ENV ASSIGNMENT_SECRET=$SECRET
+
+ARG ASSIGNMENT_SECRET
+ENV ASSIGNMENT_SECRET=$ASSIGNMENT_SECRET
 
 CMD service nginx start & gunicorn --workers 3 --bind unix:weatherapp.sock -m 000 main:website
