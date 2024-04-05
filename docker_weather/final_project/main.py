@@ -14,7 +14,7 @@ def data():
     user_input = request.form.get('u_input')
     location, forcast = data_to_present(user_input)
     if location:
-        return render_template("result.html", location=location, forcast=forcast, Assignment=os.environ['TEXT_SECRET'])
+        return render_template("result.html", location=location, forcast=forcast, Assignment=os.environ['ASSIGNMENT_SECRET'])
     error_msg = f"Sorry, couldn't find {user_input} location, please try another location."
     return render_template("search_bar.html", error=error_msg)
 
