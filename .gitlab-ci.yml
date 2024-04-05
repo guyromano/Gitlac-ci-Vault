@@ -28,6 +28,8 @@ test:
   after_script:
     - docker rm -f test
 
+
+
 upload_final_image:
   stage: deploy
   script:
@@ -36,8 +38,10 @@ upload_final_image:
     - docker tag $TEST_IMAGE $IMAGE_LATEST
     - docker push $IMAGE_VERSION
     - docker push $IMAGE_LATEST
-    - docker system prune -f
   after_script:
     - docker rmi -f $IMAGE_VERSION
+    - docker rmi -f $TEST_IMAGE
+    - docker system prune -f
+
 
 
