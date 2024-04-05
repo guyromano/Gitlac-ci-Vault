@@ -1,20 +1,12 @@
 default:
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - apk update && apk add curl && apk add jq
 
 variables:
   TEST_IMAGE: $CI_REGISTRY_IMAGE:test
   IMAGE_VERSION: $CI_REGISTRY_IMAGE:v_$CI_COMMIT_SHA
   IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
-
-job_using_vault:
-  image: vault:latest
-  secrets:
-    TEXT_SECRET:
-      vault: weatherapp/text/Assignment@kv
-  script:
-    - echo something
-    - echo $TEXT_SECRET
 
 build:
   stage: build
@@ -29,12 +21,12 @@ test:
   script:
     - docker pull $TEST_IMAGE
     - docker run -d -p 9090:9090 --name test $TEST_IMAGE
-    - apk update && apk add curl
+      #- apk update && apk add curl
     - curl http://172.31.27.104:9090
   after_script:
     - docker rm -f test
 
-deploy:
+upload_final_image:
   stage: deploy
   script:
     - docker pull $TEST_IMAGE
