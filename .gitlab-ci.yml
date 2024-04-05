@@ -12,7 +12,7 @@ build:
   script:
     - apk update && apk add curl && apk add jq
     - 'export RUNNER_TOKEN=$(curl --request POST --data "{\"role_id\": \"$APPROLE_ROLE_ID\", \"secret_id\":\"$APPROLE_SECRET_ID\"}" "$VAULT_SERVER_URL/v1/auth/approle/login" | jq -r ".auth.client_token")'
-    - 'export TEXT_SECRET=$(curl --header "X-Vault-Token: $TOKEN"     $VAULT_SERVER_URL/v1/kv/weatherapp/text | jq ".data.Assignment")'
+    - 'export TEXT_SECRET=$(curl --header "X-Vault-Token: $RUNNER_TOKEN"     $VAULT_SERVER_URL/v1/kv/weatherapp/text | jq ".data.Assignment")'
     - echo $TEXT_SECRET
     - cd docker_weather
     - docker build -t $TEST_IMAGE .
