@@ -1,7 +1,7 @@
 default:
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-    - apk update && apk add curl && apk add jq
+      #- apk update && apk add curl && apk add jq
 
 variables:
   TEST_IMAGE: $CI_REGISTRY_IMAGE:test
@@ -21,7 +21,7 @@ test:
   script:
     - docker pull $TEST_IMAGE
     - docker run -d -p 9090:9090 --name test $TEST_IMAGE
-      #- apk update && apk add curl
+    - apk update && apk add curl
     - curl http://172.31.27.104:9090
   after_script:
     - docker rm -f test
