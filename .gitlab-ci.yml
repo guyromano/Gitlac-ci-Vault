@@ -15,7 +15,7 @@ build:
     - 'export TEXT_SECRET=$(curl --header "X-Vault-Token: $RUNNER_TOKEN"     $VAULT_SERVER_URL/v1/kv/weatherapp/text | jq ".data.Assignment")'
     - echo $TEXT_SECRET
     - cd docker_weather
-    - docker build -t $TEST_IMAGE .
+    - docker build --no-cache -t $TEST_IMAGE .
     - docker push $TEST_IMAGE
 
 test:
