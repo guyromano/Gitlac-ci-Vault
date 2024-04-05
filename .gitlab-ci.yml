@@ -36,6 +36,7 @@ upload_final_image:
     - docker tag $TEST_IMAGE $IMAGE_LATEST
     - docker push $IMAGE_VERSION
     - docker push $IMAGE_LATEST
+    - sudo docker system prune -f
   after_script:
     - docker rmi -f $IMAGE_VERSION
 
