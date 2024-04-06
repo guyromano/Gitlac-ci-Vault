@@ -22,7 +22,7 @@ test:
   stage: test
   script:
     - docker pull $TEST_IMAGE
-    - docker compose up -d
+    - cd app && docker compose up -d
     - apk update && apk add curl
     - curl http://172.31.27.104:9090
   after_script:
