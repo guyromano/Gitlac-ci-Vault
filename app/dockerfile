@@ -10,10 +10,8 @@ FROM guni
 RUN apt-get update
 RUN apt-get install nginx -y
 WORKDIR /weatherapp
-COPY weatherapp /etc/nginx/sites-available/
-#COPY localhost.crt /etc/ssl/certs/localhost.crt
-#COPY localhost.key /etc/ssl/private/localhost.key
-RUN ln -s /etc/nginx/sites-available/weatherapp /etc/nginx/sites-enabled
+COPY weatherapp_nginx /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/weatherapp_nginx /etc/nginx/sites-enabled
 RUN rm /etc/nginx/sites-enabled/default
 RUN update-ca-certificates
 EXPOSE 80
