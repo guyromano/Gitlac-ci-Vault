@@ -1,7 +1,7 @@
 services:
   weatherapp:
-    build: . 
-    image: weatherapp:latest
+    image: $TEST_IMAGE
+    container_name: test
     ports:
       - 80:80
       - 443:443

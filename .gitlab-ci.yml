@@ -14,7 +14,7 @@ build:
     - 'export RUNNER_TOKEN=$(curl --request POST --data "{\"role_id\": \"$APPROLE_ROLE_ID\", \"secret_id\":\"$APPROLE_SECRET_ID\"}" "$VAULT_SERVER_URL/v1/auth/approle/login" | jq -r ".auth.client_token")'
     - 'export TEXT_SECRET=$(curl --header "X-Vault-Token: $RUNNER_TOKEN"     $VAULT_SERVER_URL/v1/kv/weatherapp/text | jq ".data.Assignment")'
     - TEXT_SECRET=$(echo $TEXT_SECRET | tr -d '"')
-    - cd docker_weather
+    - cd app
     - docker build --no-cache --build-arg ASSIGNMENT_SECRET=$TEXT_SECRET -t $TEST_IMAGE .
     - docker push $TEST_IMAGE
 
@@ -22,7 +22,7 @@ test:
   stage: test
   script:
     - docker pull $TEST_IMAGE
-    - docker run -d -p 9090:9090 --name test $TEST_IMAGE
+    - docker compose up -d
     - apk update && apk add curl
     - curl http://172.31.27.104:9090
   after_script:
